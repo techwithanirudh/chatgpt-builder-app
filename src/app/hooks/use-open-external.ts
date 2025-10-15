@@ -25,4 +25,3 @@ export function useOpenExternal() {
 
   return openExternal;
 }
-

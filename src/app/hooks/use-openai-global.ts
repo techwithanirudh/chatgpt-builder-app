@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from "react";
 import {
-  SET_GLOBALS_EVENT_TYPE,
-  SetGlobalsEvent,
   type OpenAIGlobals,
+  SET_GLOBALS_EVENT_TYPE,
+  type SetGlobalsEvent,
 } from "./types";
 
 export function useOpenAIGlobal<K extends keyof OpenAIGlobals>(
@@ -31,7 +31,8 @@ export function useOpenAIGlobal<K extends keyof OpenAIGlobals>(
         window.removeEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal);
       };
     },
-    () => (typeof window !== "undefined" ? window.openai?.[key] ?? null : null),
+    () =>
+      typeof window !== "undefined" ? (window.openai?.[key] ?? null) : null,
     () => null
   );
 }

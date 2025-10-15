@@ -1,6 +1,6 @@
-import { baseURL } from "@/baseUrl";
 import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
+import { baseURL } from "@/baseUrl";
 
 const getAppsSdkCompatibleHtml = async (baseUrl: string, path: string) => {
   const result = await fetch(`${baseUrl}${path}`);
@@ -37,7 +37,7 @@ const handler = createMcpHandler(async (server) => {
     templateUri: "ui://widget/content-template.html",
     invoking: "Loading content...",
     invoked: "Content loaded",
-    html: html,
+    html,
     description: "Displays the homepage content",
     widgetDomain: "https://nextjs.org/docs",
   };
@@ -76,25 +76,25 @@ const handler = createMcpHandler(async (server) => {
       description:
         "Fetch and display the homepage content with the name of the user",
       inputSchema: {
-        name: z.string().describe("The name of the user to display on the homepage"),
+        name: z
+          .string()
+          .describe("The name of the user to display on the homepage"),
       },
       _meta: widgetMeta(contentWidget),
     },
-    async ({ name }) => {
-      return {
-        content: [
-          {
-            type: "text",
-            text: name,
-          },
-        ],
-        structuredContent: {
-          name: name,
-          timestamp: new Date().toISOString(),
+    async ({ name }) => ({
+      content: [
+        {
+          type: "text",
+          text: name,
         },
-        _meta: widgetMeta(contentWidget),
-      };
-    }
+      ],
+      structuredContent: {
+        name,
+        timestamp: new Date().toISOString(),
+      },
+      _meta: widgetMeta(contentWidget),
+    })
   );
 });
 

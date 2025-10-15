@@ -8,7 +8,7 @@ export function useWidgetProps<T extends Record<string, unknown>>(
   const fallback =
     typeof defaultState === "function"
       ? (defaultState as () => T | null)()
-      : defaultState ?? null;
+      : (defaultState ?? null);
 
   return props ?? fallback;
 }

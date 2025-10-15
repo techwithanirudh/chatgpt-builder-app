@@ -40,7 +40,7 @@ export default function RootLayout({
 function NextChatSDKBootstrap({ baseUrl }: { baseUrl: string }) {
   return (
     <>
-      <base href={baseUrl}></base>
+      <base href={baseUrl} />
       <script>{`window.innerBaseUrl = ${JSON.stringify(baseUrl)}`}</script>
       <script>
         {"(" +
@@ -86,7 +86,7 @@ function NextChatSDKBootstrap({ baseUrl }: { baseUrl: string }) {
               "click",
               (e) => {
                 const a = (e?.target as HTMLElement)?.closest("a");
-                if (!a || !a.href) return;
+                if (!(a && a.href)) return;
                 const url = new URL(a.href, window.location.href);
                 if (
                   url.origin !== window.location.origin &&

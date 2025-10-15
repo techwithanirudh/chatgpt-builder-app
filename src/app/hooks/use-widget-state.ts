@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState, type SetStateAction } from "react";
-import { useOpenAIGlobal } from "./use-openai-global";
+import { type SetStateAction, useCallback, useEffect, useState } from "react";
 import type { UnknownObject } from "./types";
+import { useOpenAIGlobal } from "./use-openai-global";
 
 export function useWidgetState<T extends UnknownObject>(
   defaultState: T | (() => T)
@@ -21,7 +21,7 @@ export function useWidgetState<T extends UnknownObject>(
     }
     return typeof defaultState === "function"
       ? defaultState()
-      : defaultState ?? null;
+      : (defaultState ?? null);
   });
 
   useEffect(() => {

@@ -15,4 +15,3 @@ export function useRequestDisplayMode() {
 
   return requestDisplayMode;
 }
-
