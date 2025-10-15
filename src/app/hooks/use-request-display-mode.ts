@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import type { DisplayMode } from "./types";
+import { useCallback } from 'react'
+import type { DisplayMode } from './types'
 
 /**
  * Hook to request display mode changes
@@ -7,11 +7,11 @@ import type { DisplayMode } from "./types";
  */
 export function useRequestDisplayMode() {
   const requestDisplayMode = useCallback(async (mode: DisplayMode) => {
-    if (typeof window !== "undefined" && window?.openai?.requestDisplayMode) {
-      return await window.openai.requestDisplayMode({ mode });
+    if (typeof window !== 'undefined' && window?.openai?.requestDisplayMode) {
+      return await window.openai.requestDisplayMode({ mode })
     }
-    return { mode };
-  }, []);
+    return { mode }
+  }, [])
 
-  return requestDisplayMode;
+  return requestDisplayMode
 }

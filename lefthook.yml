@@ -1,12 +1,26 @@
 pre-commit:
-  jobs:
-    - run: bun x ultracite fix
-      glob: 
-        - "*.js"
-        - "*.jsx"
-        - "*.ts"
-        - "*.tsx"
-        - "*.json"
-        - "*.jsonc"
-        - "*.css"
+  parallel: true
+  commands:
+    check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      exclude:
+        - node_modules/**
+        - .next/**
+        - dist/**
+      run: bun biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
+    typecheck:
+      run: bun typecheck
+    spelling:
+      run: bun check:spelling {staged_files}
+      stage_fixed: true
+
+post-merge:
+  commands:
+    install-deps:
+      run: bun i
+
+commit-msg:
+  commands:
+    'lint commit message':
+      run: bun commitlint --edit {1}

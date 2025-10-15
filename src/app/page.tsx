@@ -1,38 +1,39 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 import {
   useDisplayMode,
   useMaxHeight,
   useRequestDisplayMode,
   useWidgetProps,
-} from "./hooks";
+} from './hooks'
 
 export default function Home() {
   const toolOutput = useWidgetProps<{
-    name?: string;
-    result?: { structuredContent?: { name?: string } };
-  }>();
-  const maxHeight = useMaxHeight() ?? undefined;
-  const displayMode = useDisplayMode();
-  const requestDisplayMode = useRequestDisplayMode();
+    name?: string
+    result?: { structuredContent?: { name?: string } }
+  }>()
+  const maxHeight = useMaxHeight() ?? undefined
+  const displayMode = useDisplayMode()
+  const requestDisplayMode = useRequestDisplayMode()
 
-  const name = toolOutput?.result?.structuredContent?.name || toolOutput?.name;
+  const name = toolOutput?.result?.structuredContent?.name || toolOutput?.name
 
   return (
     <div
       className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20"
       style={{
         maxHeight,
-        height: displayMode === "fullscreen" ? maxHeight : undefined,
+        height: displayMode === 'fullscreen' ? maxHeight : undefined,
       }}
     >
-      {displayMode !== "fullscreen" && (
+      {displayMode !== 'fullscreen' && (
         <button
           aria-label="Enter fullscreen"
           className="fixed top-4 right-4 z-50 cursor-pointer rounded-full bg-white p-2.5 text-slate-700 shadow-lg ring-1 ring-slate-900/10 transition-colors hover:bg-slate-50 dark:bg-slate-800 dark:text-slate-300 dark:ring-white/10 dark:hover:bg-slate-700"
-          onClick={() => requestDisplayMode("fullscreen")}
+          onClick={() => requestDisplayMode('fullscreen')}
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -64,10 +65,10 @@ export default function Home() {
             Welcome to the ChatGPT Apps SDK Next.js Starter
           </li>
           <li className="mb-2 tracking-[-.01em]">
-            Name returned from tool call: {name ?? "..."}
+            Name returned from tool call: {name ?? '...'}
           </li>
           <li className="mb-2 tracking-[-.01em]">
-            MCP server path:{" "}
+            MCP server path:{' '}
             <Link className="underline" href="/mcp">
               /mcp
             </Link>
@@ -93,5 +94,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  );
+  )
 }

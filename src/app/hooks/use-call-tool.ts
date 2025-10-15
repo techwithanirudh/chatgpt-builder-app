@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import type { CallToolResponse } from "./types";
+import { useCallback } from 'react'
+import type { CallToolResponse } from './types'
 
 /**
  * Hook to call MCP tools directly from the widget
@@ -11,13 +11,13 @@ export function useCallTool() {
       name: string,
       args: Record<string, unknown>
     ): Promise<CallToolResponse | null> => {
-      if (typeof window !== "undefined" && window?.openai?.callTool) {
-        return await window.openai.callTool(name, args);
+      if (typeof window !== 'undefined' && window?.openai?.callTool) {
+        return await window.openai.callTool(name, args)
       }
-      return null;
+      return null
     },
     []
-  );
+  )
 
-  return callTool;
+  return callTool
 }
